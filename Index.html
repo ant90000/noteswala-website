@@ -181,15 +181,294 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 shadow-xl">
-            <a href="#library" class="block py-2.5 px-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600">📂 NotesWala Library (Free Web Read)</a>
-            <a href="#courses" class="block py-2.5 px-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600">🎓 DU SOL & IGNOU Courses</a>
-            <a href="#how-it-works" class="block py-2.5 px-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600">⚡ How It Works</a>
-            <a href="#pricing" class="block py-2.5 px-3 rounded-lg text-sm font-bold text-brand-600 bg-brand-50">💎 ₹9 Early Bird Pass</a>
-        </div>
-    </header>
+            <!-- ================= FIXED APPLICATION JAVASCRIPT ================= -->
+    <script>
+        // 1. Mobile Menu Toggle Fix (100% Working)
+        const menuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
 
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle("hidden");
+            });
+
+            // Close mobile menu when clicking outside or clicking any link
+            mobileMenu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.add("hidden");
+                });
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                    mobileMenu.classList.add("hidden");
+                }
+            });
+        }
+
+        // 2. Pre-Loaded Official DU SOL & IGNOU Catalog
+        const DEFAULT_LIBRARY = [
+            {
+                id: 1,
+                course: "B.Com",
+                badge: "DU SOL • B.Com Sem 1",
+                title: "Financial Accounting",
+                type: "pdf",
+                desc: "Unit 1 to 5 Complete Notes: Accounting Concepts, IFRS, Depreciation, Inventory, Branch & Departmental Accounting.",
+                preview: "• Accounting Principles: Entity, Money Measurement, Going Concern, Dual Aspect & Conservatism.\n• Depreciation Methods: Straight Line Method (SLM) vs Written Down Value (WDV).\n• Final Accounts: Trading, P&L Account, and Balance Sheet adjustments.\n• Branch Accounting: Debtors System, Stock & Debtors System, and Inland Branches.\n• Top Exam Focus: Distinguish between Capital & Revenue Expenditure + Numerical on Branch Debtors."
+            },
+            {
+                id: 2,
+                course: "B.Com",
+                badge: "DU SOL • B.Com Sem 1",
+                title: "Business Laws",
+                type: "pdf",
+                desc: "Indian Contract Act 1872, Sale of Goods Act 1930, and LLP Act 2008 explained with landmark case laws.",
+                preview: "• Essential Elements of a Valid Contract (Sec 10): Offer, Acceptance, Lawful Consideration, Free Consent.\n• Void vs Voidable Agreements & Contingent Contracts.\n• Breach of Contract & Remedies (Hadley v. Baxendale rule).\n• Sale of Goods Act: Conditions vs Warranties, Doctrine of Caveat Emptor, Unpaid Seller Rights.\n• LLP Act 2008: Nature of LLP, Designated Partners, and Incorporation process."
+            },
+            {
+                id: 3,
+                course: "B.Com",
+                badge: "DU SOL • B.Com Sem 1",
+                title: "Business Organization & Management",
+                type: "audio",
+                desc: "5-Min Hinglish Audio Summary + Revision PDF covering MSMEs, Planning, Organizing, Leadership & Motivation.",
+                preview: "• Forms of Business: Sole Proprietorship, HUF, Partnership, LLP, and Joint Stock Company.\n• Functions of Management (POSDCORB): Planning, Organizing, Staffing, Directing, Controlling.\n• Motivation Theories: Maslow's Hierarchy of Needs & Herzberg's Two-Factor Theory.\n• Leadership Styles: Autocratic, Democratic, and Laissez-Faire.\n• Modern Trends: Work-life balance, Corporate Social Responsibility (CSR), and Ethics."
+            },
+            {
+                id: 4,
+                course: "B.Com",
+                badge: "DU SOL • B.Com Sem 2",
+                title: "Corporate Accounting",
+                type: "pdf",
+                desc: "Share Capital Issue & Forfeiture, Redemption of Preference Shares & Debentures, Amalgamation & Cash Flow.",
+                preview: "• Issue, Forfeiture & Re-issue of Shares: Pro-rata allotment & Capital Reserve transfer.\n• Redemption of Preference Shares (Sec 55): Out of divisible profits (CRR) or fresh issue.\n• Financial Statements of Companies: Schedule III Balance Sheet format.\n• Internal Reconstruction & Amalgamation (AS-14): Purchase Consideration methods.\n• Cash Flow Statement (AS-3): Operating, Investing, and Financing activities."
+            },
+            {
+                id: 5,
+                course: "B.Com",
+                badge: "DU SOL • B.Com Sem 2",
+                title: "Company Law",
+                type: "pdf",
+                desc: "Companies Act 2013: Lifting of Corporate Veil, MOA & AOA, Prospectus, Directors, and Winding Up.",
+                preview: "• Corporate Personality & Lifting the Corporate Veil (Salomon v. Salomon).\n• Types of Companies: OPC, Small Company, Private vs Public, Section 8 Company.\n• Memorandum of Association (MOA) Clauses & Doctrine of Ultra Vires.\n• Articles of Association (AOA) & Doctrine of Indoor Management (Turquand's Rule).\n• Company Meetings: AGM, EGM, Quorum, Proxies, and Board of Directors powers."
+            },
+            {
+                id: 6,
+                course: "B.Com",
+                badge: "DU SOL • B.Com Sem 3",
+                title: "Financial Management & Business Statistics",
+                type: "pdf",
+                desc: "Time Value of Money, Capital Budgeting (NPV/IRR), Cost of Capital, Working Capital & Statistical Measures.",
+                preview: "• Time Value of Money: Compounding & Discounting techniques.\n• Capital Budgeting: Payback Period, NPV, IRR, and Profitability Index.\n• Cost of Capital (WACC): Cost of Debt, Preference, and Equity (CAPM).\n• Capital Structure Theories: Net Income, Net Operating Income & MM Hypothesis.\n• Business Statistics: Mean, Median, Mode, Standard Deviation, Correlation & Regression."
+            },
+            {
+                id: 7,
+                course: "B.Com_Hons",
+                badge: "DU SOL • B.Com (Hons)",
+                title: "Management Principles & Applications",
+                type: "pdf",
+                desc: "Classical, Neo-Classical & Modern Management Schools, Strategic Planning, Decision Making & Control.",
+                preview: "• Evolution of Management: Taylor's Scientific Management, Fayol's 14 Principles, Weber's Bureaucracy.\n• Hawthorne Experiments (Elton Mayo) & Human Relations Approach.\n• Strategic Analysis: SWOT Matrix, Porter's Five Forces & BCG Matrix.\n• Departmentation, Span of Control, Decentralization vs Delegation.\n• Controlling Techniques: Budgetary Control, PERT & CPM."
+            },
+            {
+                id: 8,
+                course: "BBA",
+                badge: "DU SOL • BBA / BMS",
+                title: "Principles of Microeconomics & Management",
+                type: "pdf",
+                desc: "Demand & Supply Elasticity, Consumer Utility, Production Cost Curves, Market Structures & Case Studies.",
+                preview: "• Law of Demand, Price, Income & Cross Elasticity of Demand.\n• Consumer Behavior: Cardinal Utility vs Indifference Curve Analysis.\n• Theory of Cost & Production: Law of Variable Proportions & Returns to Scale.\n• Market Structures: Perfect Competition, Monopoly, Monopolistic Competition & Oligopoly."
+            },
+            {
+                id: 9,
+                course: "B.A_Prog",
+                badge: "DU SOL • B.A. Programme",
+                title: "Political Theory & History of India",
+                type: "pdf",
+                desc: "Liberty, Equality, Justice, Rights, Harappan Civilization, Mauryan Empire & Gupta Period Notes (Hindi & Eng).",
+                preview: "• What is Politics? Normative vs Empirical approaches to Political Theory.\n• Core Concepts: Negative vs Positive Liberty (Isaiah Berlin), Rawls' Theory of Justice.\n• History of India I: Sources of Ancient History, Harappan Town Planning & Vedic Society.\n• Rise of Magadha, Ashoka's Dhamma, and Gupta Golden Age debate."
+            },
+            {
+                id: 10,
+                course: "IGNOU",
+                badge: "IGNOU • BCOMG / BAG",
+                title: "BCOC-131 & BEVAE-181 Block Notes",
+                type: "pdf",
+                desc: "Simplified IGNOU Block-wise Summaries, Solved Assignment Reference Formats, and Term-End Exam PYQs.",
+                preview: "• BCOC-131 Financial Accounting: Complete Block 1 to 5 simplified theory & solved numericals.\n• BEVAE-181 Environmental Studies: Ecosystem, Biodiversity, Pollution & Sustainable Development MCQs.\n• TEE Exam Strategy: How to structure 20-mark answers in IGNOU Term-End Examinations."
+            }
+        ];
+
+        let activeFilter = "ALL";
+        let currentItem = null;
+        let timerInterval = null;
+        let libraryData = [...DEFAULT_LIBRARY];
+
+        function renderNotes() {
+            const grid = document.getElementById("notes-grid");
+            const emptyState = document.getElementById("empty-state");
+            const query = (document.getElementById("search-input").value || "").toLowerCase().trim();
+
+            const filtered = libraryData.filter(item => {
+                const matchesCourse = activeFilter === "ALL" || item.course === activeFilter;
+                const matchesQuery = !query || 
+                    item.title.toLowerCase().includes(query) || 
+                    item.desc.toLowerCase().includes(query) || 
+                    item.badge.toLowerCase().includes(query);
+                return matchesCourse && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            grid.innerHTML = filtered.map(item => {
+                const isAudio = item.type === "audio";
+                const iconClass = isAudio ? "fa-solid fa-headphones text-indigo-600 bg-indigo-50" : "fa-solid fa-file-pdf text-rose-600 bg-rose-50";
+                return `
+                    <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-1 hover:border-brand-500/50 transition duration-300">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-100">${item.badge}</span>
+                                <div class="w-10 h-10 rounded-xl ${iconClass} flex items-center justify-center text-lg">
+                                    <i class="${iconClass.split(' ').slice(0,2).join(' ')}"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-extrabold text-slate-900 mb-2">${item.title}</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">${item.desc}</p>
+                        </div>
+                        <div class="flex items-center gap-2 pt-3 border-t border-slate-100">
+                            <button onclick="openDownloadModal(${item.id})" class="w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-brand-600 text-white font-bold text-xs sm:text-sm py-3 px-4 rounded-xl transition">
+                                <i class="fa-solid fa-bolt-lightning text-amber-400"></i>
+                                <span>Read Free / Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                activeFilter = btn.getAttribute("data-filter");
+                document.querySelectorAll(".filter-btn").forEach(b => {
+                    b.className = "filter-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:border-brand-500 transition";
+                });
+                btn.className = "filter-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-slate-900 text-white shadow-sm transition";
+                renderNotes();
+            });
+        });
+
+        document.getElementById("search-input").addEventListener("input", renderNotes);
+
+        function openDownloadModal(id) {
+            currentItem = libraryData.find(x => x.id === id) || libraryData[0];
+            const modal = document.getElementById("download-modal");
+            const timerSection = document.getElementById("timer-section");
+            const unlockedSection = document.getElementById("unlocked-section");
+            const countNum = document.getElementById("countdown-num");
+            const circle = document.getElementById("timer-circle");
+
+            document.getElementById("modal-badge").innerText = currentItem.badge;
+            document.getElementById("modal-title").innerText = currentItem.title;
+            document.getElementById("modal-preview-text").innerText = currentItem.preview;
+            document.getElementById("modal-bot-btn").href = "https://t.me/ExamPassStudyTestBot";
+
+            timerSection.classList.remove("hidden");
+            unlockedSection.classList.add("hidden");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+
+            let seconds = 8;
+            countNum.innerText = seconds;
+            circle.style.setProperty("--progress", "0deg");
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                seconds--;
+                countNum.innerText = seconds;
+                circle.style.setProperty("--progress", `${((8 - seconds) / 8) * 360}deg`);
+
+                if (seconds <= 0) {
+                    clearInterval(timerInterval);
+                    timerSection.classList.add("hidden");
+                    unlockedSection.classList.remove("hidden");
+                }
+            }, 1000);
+        }
+
+        function closeDownloadModal() {
+            clearInterval(timerInterval);
+            const modal = document.getElementById("download-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        function downloadSummaryTxt() {
+            if (!currentItem) return;
+            const content = `========================================\nNOTESWALA QUICK REVISION SHEET\nSubject: ${currentItem.title} (${currentItem.badge})\nFull PDF & Audio Bot: https://t.me/ExamPassStudyTestBot\n========================================\n\n${currentItem.preview}\n\n----------------------------------------\nUnlock all units & solved PYQs on Telegram: https://t.me/ExamPassStudyTestBot`;
+            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${currentItem.title.replace(/\s+/g, "_")}_NotesWala.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        const POLICIES = {
+            privacy: {
+                title: "Privacy Policy — NotesWala",
+                body: `<p><strong>1. Information We Collect:</strong> NotesWala does not require account registration on this website. When you use our Telegram Study Bot (@ExamPassStudyTestBot), we store your public Telegram User ID solely to track your 1-Free download limit and active subscription validity.</p><p><strong>2. Google AdSense & Cookies:</strong> Third-party vendors use cookies to serve ads based on prior visits.</p>`
+            },
+            terms: {
+                title: "Terms of Use & Disclaimer",
+                body: `<p><strong>1. Independent Platform:</strong> NotesWala is an independent educational platform and is not officially affiliated with Delhi University (DU SOL) or IGNOU.</p>`
+            },
+            contact: {
+                title: "Contact & Student Support",
+                body: `<p><strong>Support Bot:</strong> Open <a href="https://t.me/ExamPassStudyTestBot" target="_blank" class="text-brand-600 underline font-bold">@ExamPassStudyTestBot</a> and send <code>/paysupport</code>.</p>`
+            }
+        };
+
+        function openPolicyModal(type) {
+            const p = POLICIES[type];
+            if (!p) return;
+            document.getElementById("policy-title").innerText = p.title;
+            document.getElementById("policy-body").innerHTML = p.body;
+            const m = document.getElementById("policy-modal");
+            m.classList.remove("hidden");
+            m.classList.add("flex");
+        }
+
+        function closePolicyModal() {
+            document.getElementById("policy-modal").classList.add("hidden");
+            document.getElementById("policy-modal").classList.remove("flex");
+        }
+
+        document.querySelectorAll(".bot-link").forEach(el => { el.href = "https://t.me/ExamPassStudyTestBot"; });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+        renderNotes();
+    </script>
+
+    </header>
     <!-- ================= HERO SECTION ================= -->
     <section class="pt-10 pb-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center reveal active">
         <div class="inline-flex items-center gap-2 bg-white border border-slate-200 text-brand-700 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-6 shadow-sm">
